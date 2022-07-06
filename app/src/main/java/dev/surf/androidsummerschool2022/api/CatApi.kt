@@ -6,6 +6,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,6 +16,9 @@ interface CatApi {
 
     @GET("cat?json=true")
     suspend fun getRandomCat(@Query("tag") tag: String?): CatResponse
+
+    @GET("cat?json=true")
+    fun getRandomCatBlocking(@Query("tag") tag: String?): Call<CatResponse>
 
     companion object {
         private const val BASE_URL = "https://cataas.com/"
